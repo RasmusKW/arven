@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Humlenissens Bryggeri</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,6 +82,7 @@
   --hand: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
 }
 *, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
 body {
   position: relative;
@@ -360,6 +361,7 @@ body.in-hall #cellar { display: block; }
   border: 2px solid var(--gold);
   border-radius: 10px;
   overflow: hidden;
+  container-type: size;
   transition: transform .3s ease, border-color .4s ease .7s, box-shadow .4s ease .7s;
   box-shadow: 0 12px 28px rgba(0, 0, 0, .55);
 }
@@ -374,12 +376,13 @@ body.in-hall #cellar { display: block; }
 .ribbon { position: absolute; z-index: 0; background: linear-gradient(90deg, var(--gold), var(--gold-hi) 50%, var(--gold)); box-shadow: 0 0 6px rgba(0, 0, 0, .3); }
 .ribbon.v { top: 0; bottom: 0; left: 50%; width: clamp(10px, 1.5vw, 16px); transform: translateX(-50%); }
 .ribbon.h { left: 0; right: 0; top: 50%; height: clamp(10px, 1.5vw, 16px); transform: translateY(-50%); background: linear-gradient(var(--gold), var(--gold-hi) 50%, var(--gold)); }
-.bow { position: absolute; z-index: 1; top: -4px; left: 50%; width: clamp(40px, 7vw, 64px); transform: translateX(-50%); filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .4)); }
+.bow { position: absolute; z-index: 1; top: -4px; left: 50%; width: clamp(40px, 7vw, 64px); width: clamp(34px, 18cqw, 64px); transform: translateX(-50%); filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .4)); }
 .medal {
   grid-row: 2;
   position: relative;
   z-index: 1;
   width: clamp(76px, 14dvh, 140px);
+  width: min(52cqw, 40cqh);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -390,8 +393,8 @@ body.in-hall #cellar { display: block; }
 }
 .m-wreath { position: absolute; left: -20%; top: -20%; width: 140%; height: 140%; pointer-events: none; z-index: -1; animation: spin 40s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg) } }
-.d-num { font-family: var(--festive); font-weight: 700; font-size: clamp(2rem, 7.2dvh, 4.2rem); line-height: 1; display: block; text-box: trim-both cap alphabetic; color: var(--gold-hi); text-shadow: 0 2px 0 rgba(0, 0, 0, .4), 0 0 16px var(--glow-soft); }
-.d-date { grid-row: 3; align-self: start; z-index: 1; margin-top: clamp(14px, 2.6dvh, 24px); padding: .25em .85em; border-radius: 999px; background: rgba(0, 0, 0, .42); color: var(--gold-hi); font-family: var(--display); font-weight: 600; font-size: clamp(.68rem, 1.5vw, .84rem); letter-spacing: .08em; text-transform: uppercase; }
+.d-num { font-family: var(--festive); font-weight: 700; font-size: clamp(2rem, 7.2dvh, 4.2rem); font-size: min(26cqw, 20cqh); line-height: 1; display: block; text-align: center; text-box: trim-both cap alphabetic; color: var(--gold-hi); text-shadow: 0 2px 0 rgba(0, 0, 0, .4), 0 0 16px var(--glow-soft); }
+.d-date { grid-row: 3; align-self: start; z-index: 1; margin-top: clamp(14px, 2.6dvh, 24px); margin-top: calc(min(52cqw, 40cqh) * .21 + 6px); padding: .25em .85em; white-space: nowrap; border-radius: 999px; background: rgba(0, 0, 0, .42); color: var(--gold-hi); font-family: var(--display); font-weight: 600; font-size: clamp(.68rem, 1.5vw, .84rem); font-size: clamp(.58rem, 3.6cqw, .84rem); letter-spacing: .08em; text-transform: uppercase; }
 .icicles { position: absolute; top: 0; left: 0; width: 100%; height: 24px; z-index: 2; }
 .tile.locked .hatch { box-shadow: inset 0 0 46px rgba(220, 236, 255, .32), 0 12px 28px rgba(0, 0, 0, .55); }
 .tile.locked .d-date { color: var(--ice); }
@@ -517,6 +520,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
 }
 @keyframes rise { from { transform: translateY(14px); opacity: 0 } to { transform: none; opacity: 1 } }
 .sheet :focus-visible { outline-color: var(--copper-ink); }
+.sheet:focus, .step:focus, #hallTitle:focus { outline: none; }
 .sh-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
 .sh-head h2 { font-size: clamp(1.9rem, 6vw, 2.5rem); color: var(--ink); margin-top: 4px; }
 .close { flex: none; padding: .35em .8em; border: 1px solid var(--ink-soft); border-radius: 4px; background: transparent; color: var(--ink); font-family: var(--display); font-size: .88rem; cursor: pointer; }
@@ -619,7 +623,10 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
 .done-actions .cta { justify-self: auto; }
 .done-actions [data-close] { min-width: 8rem; }
 .book { margin: 0; padding: 0; list-style: none; display: grid; }
-.book-row { display: grid; gap: 6px; justify-items: start; padding: 12px 0; border-bottom: 1px dashed var(--parch-edge); }
+.book-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 14px; row-gap: 4px; align-items: center; padding: 12px 0; border-bottom: 1px dashed var(--parch-edge); }
+.book-row > .eyebrow, .book-head { grid-column: 1 / -1; }
+.book-row .smallbtn { grid-column: 2; grid-row: 2 / span 2; align-self: center; }
+.book-beer, .book-row .book-note { grid-column: 1; }
 .book-row.locked { opacity: .6; }
 .book-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; width: 100%; }
 .book-beer { font-family: var(--festive); font-weight: 700; font-size: 1.2rem; }
@@ -641,7 +648,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
 .sig { font-family: var(--hand); font-size: 1.9rem; text-align: right; color: var(--ink); }
 
 /* ---------- Spilmester (kun prototype) ---------- */
-.gm-toggle { position: fixed; right: 16px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 20; padding: .35em .8em; border: 1px dashed var(--text-dim); border-radius: 4px; background: var(--wall); color: var(--text-dim); font-family: var(--display); font-size: .82rem; letter-spacing: .06em; cursor: pointer; }
+.gm-toggle { position: fixed; right: 16px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 9; padding: .35em .8em; border: 1px dashed var(--text-dim); border-radius: 4px; background: var(--wall); color: var(--text-dim); font-family: var(--display); font-size: .82rem; letter-spacing: .06em; cursor: pointer; }
 .gm { position: fixed; right: 16px; bottom: calc(58px + env(safe-area-inset-bottom, 0px)); z-index: 20; width: min(330px, calc(100% - 32px)); max-height: calc(100% - 90px); overflow-y: auto; display: grid; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 6px; background: var(--wall-2); color: var(--text); font-size: 1rem; box-shadow: 0 16px 40px rgba(0, 0, 0, .6); }
 .gm h2 { font-size: 1.3rem; color: var(--gold-hi); }
 .gm p { color: var(--text-dim); }
@@ -802,19 +809,15 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
 </section>
 
 <div class="sheet-wrap" id="sheetWrap" hidden>
-  <article class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"></article>
+  <article class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" tabindex="-1"></article>
 </div>
 
-<button class="gm-toggle" id="gmToggle" type="button" aria-expanded="false" aria-controls="gm">Spilmester</button>
+<button class="gm-toggle" id="gmToggle" type="button" aria-expanded="false" aria-controls="gm" hidden>Spilmester</button>
 <div class="gm" id="gm" role="dialog" aria-labelledby="gmTitle" hidden>
   <h2 id="gmTitle">Spilmester</h2>
-  <p>Kun i prototypen. På den rigtige side kan panelet gemmes bag adressen med #spilmester.</p>
+  <p>Kun for spilmesteren. Knappen vises kun, når siden åbnes med #spilmester bag adressen.</p>
   <label for="gmDate">Lad som om datoen er</label>
   <select id="gmDate"></select>
-  <div>
-    <p class="eyebrow">Testsvar (pladsholdere)</p>
-    <ul id="gmAnswers"></ul>
-  </div>
   <div class="gm-actions">
     <button type="button" id="gmGate">Vis porten igen</button>
     <button type="button" id="gmReset" class="danger">Nulstil alt</button>
@@ -834,49 +837,42 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
     { id: "ingefaer", name: "Ingefær" }, { id: "kardemomme", name: "Kardemomme" }, { id: "vanilje", name: "Vanilje" }, { id: "muskat", name: "Muskatnød" }
   ];
 
-  // Hvert trin i opskriften tjekkes for sig. Svarene ligger kun som SHA-256 af "kar|trin|svar".
+  // Hvert trin i opskriften tjekkes for sig. Svarene ligger kun som SHA-256 af "kar|trin|svar" (flere stavemåder pr. trin).
   const STATIONS = [
     { id: 1, num: 1, name: "Mæskekarret", short: "mæskekarret", phase: "Mæskning", advent: "1. advent", date: "2026-11-29", dateShort: "29. nov", dateLabel: "søndag 29. november",
       trinLabel: "Trin 2–4", trin: [2, 3, 4], vessel: "mash", door: "red",
       text: "Malten skal i vand, og vandet skal have præcis den rette varme.",
       steps: [
-        { type: "text", label: "Malt", prompt: "Maltens navn", ph: "Skriv maltens navn", hash: "03da7c864a4058ec17ff1735c9b8f2e982b28a2b3b1a65616f5c6f368eb99a8d" },
-        { type: "number", label: "Temperatur", prompt: "Mæsketemperaturen", unit: "°C", fmt: v => v + " °C", hash: "329602076563139020deb8a7ed8e3c56641ffa7d28e0a13c67af14f75ddac7ef" },
-        { type: "symbol", label: "Maltsæk", prompt: "Mærket på maltsækken", hash: "ef1095c7554b47630a74183cd0559b575be6236b88e904df76e261dea03b8f1f" }
+        { type: "text", label: "Malt", prompt: "Maltens navn", ph: "Skriv maltens navn", hash: ["4f5bf4f4025a14c00bacf04831858a415f8256dc283a4392332dad9a68e22440", "03da7c864a4058ec17ff1735c9b8f2e982b28a2b3b1a65616f5c6f368eb99a8d", "40388a98013ef916067d8fa0f8da754f1e6b9ab698455f66928c9480c60a9bfd", "910eecc1a5f082d22325448480849c9a4d9395ef2350cdedb0e991d3ee5b5022", "337024978f4129b890338c804925ba6bb4fc911c7ae83a9a2b51b1dce51b6e76", "de1cd7937164c10a44ca7ac6c48868c26d45208f1af89c16a438733e297f568a"] },
+        { type: "number", label: "Temperatur", prompt: "Mæsketemperaturen", unit: "°C", fmt: v => v + " °C", hash: ["329602076563139020deb8a7ed8e3c56641ffa7d28e0a13c67af14f75ddac7ef"] },
+        { type: "symbol", label: "Maltsæk", prompt: "Mærket på maltsækken", hash: ["835f5478f2ba0db32ae870d0014e659d34fd97f4234a76e0dbd637b49349e266"] }
       ] },
     { id: 2, num: 2, name: "Kobberkedlen", short: "kobberkedlen", phase: "Kogning", advent: "2. advent", date: "2026-12-06", dateShort: "6. dec", dateLabel: "søndag 6. december",
       trinLabel: "Trin 5–7", trin: [5, 6, 7], vessel: "kettle", door: "green",
       text: "Urten skal koge, humlen skal i, og så mangler der julekrydderi i gryden.",
       steps: [
-        { type: "text", label: "Humle", prompt: "Humlesorten", ph: "Skriv humlens navn", hash: "75fd7af772be89af92284de24f2d9e9fcb78f20cc7eaca8e00bc88ecf2245ee3" },
-        { type: "multi", label: "Krydderier", prompt: "De tre julekrydderier", pick: 3, hash: "82f71eaedbd9fce64ee7b84c644aeb93e6cdf5fcb4f0032afadc8d09f2cf0c78" },
-        { type: "number", label: "Kogetid", prompt: "Kogetiden", unit: "min.", fmt: v => v + " min.", hash: "d1216c17dda45a0a1137c13e8fc26b468ed9a8488cef8c880962ade2a7f15ecf" }
+        { type: "text", label: "Humle", prompt: "Humlesorten", ph: "Skriv humlens navn", hash: ["2a3127823572e1d0a74eb4bd447904788d59756155b80f4434df526107458f4c", "9cc730562fdbfa20581eef496aa651055643bdf418d61ed3b17bc5cd09c9c391", "11fa80f68dfc979c761bb429f3740c7cf4cbe702476f25dcc941940b4efe768e", "e51e15b59546479f52663697bd3296f1a3c9e05d2f6db39913e77d9df92f2df0", "23fedaf3d713d309ac97028dae04f03abb30821c885c19f4b34fe9ad5a7cd24a", "f5f747279c150109a6c4a97baf3044b87c045e912bebd3a673b3bc75982766ce"] },
+        { type: "multi", label: "Krydderier", prompt: "De tre julekrydderier", pick: 3, hash: ["82f71eaedbd9fce64ee7b84c644aeb93e6cdf5fcb4f0032afadc8d09f2cf0c78"] },
+        { type: "number", label: "Kogetid", prompt: "Kogetiden", unit: "min.", fmt: v => v + " min.", hash: ["522855c346d7e0cefba6a9f03d3ef5406961a7ff43ab8df57ab6ed5e4c3938ec"] }
       ] },
     { id: 3, num: 3, name: "Gærtanken", short: "gærtanken", phase: "Gæring", advent: "3. advent", date: "2026-12-13", dateShort: "13. dec", dateLabel: "søndag 13. december",
       trinLabel: "Trin 8–10", trin: [8, 9, 10], vessel: "tank", door: "green",
       text: "Gæren skal arbejde i ro og mørke. Den har sine egne luner, ligesom en vis nisse.",
       steps: [
-        { type: "text", label: "Gær", prompt: "Gærens navn", ph: "Skriv gærens navn", hash: "ae22d600909cd8243a3bc9047935c4fa585ebb54b484a00fdebb08ea5d0ab281" },
-        { type: "order", label: "Omrøring", prompt: "Rør i karret i den rigtige rækkefølge", len: 4, hash: "9be48b6561bd6ecba754aec4725238f1e5e2a0b8c3e184729567aa27add9aaf8" },
-        { type: "number", label: "Gæring", prompt: "Antal dage i gæring", unit: "dage", fmt: v => v + (v == 1 ? " dag" : " dage"), hash: "6839254f430544c60cef5c6ee6066e30fddd0eb4fbe80ccd35dab701b2db78fa" }
+        { type: "text", label: "Gær", prompt: "Gærens navn", ph: "Skriv gærens navn", hash: ["04c7cb62132977a64dae16b988e4f310d425adccfefd74f843d1264c207415a4"] },
+        { type: "order", label: "Haner", prompt: "Mærkerne for hane 1, 2, 3 og 4", len: 4, hash: ["1bab049b3e71a5cb3e88f1aa56a08cf6149e82891e7365b56aa43a7736124b08"] },
+        { type: "number", label: "Gæring", prompt: "Antal dage i gæring", unit: "dage", fmt: v => v + (v == 1 ? " dag" : " dage"), hash: ["4e736b05a195f2a1fd6b20fd6c016d1dd2e4449b199836da81c9018db99c23a3"] }
       ] },
     { id: 4, num: 4, name: "Lagerkælderen", short: "lagerkælderen", phase: "Lagring og tapning", advent: "4. advent", date: "2026-12-20", dateShort: "20. dec", dateLabel: "søndag 20. december",
-      trinLabel: "Trin 11–14", trin: [11, 12, 13], vessel: "barrels", door: "red",
+      trinLabel: "Trin 11–13", trin: [11, 12, 13], vessel: "barrels", door: "red",
       text: "44 tønder venter på deres segl. Find den rette tønde, og giv årets julebryg et navn.",
       steps: [
-        { type: "number", label: "Tønde", prompt: "Nummeret på den rette tønde", unit: "", fmt: v => "Tønde nr. " + v, hash: "a2e8850c96dc0e6f59d69966e9255f458a2cb6c965b01aa47a0a4b313755f17e" },
-        { type: "symbol", label: "Segl", prompt: "Seglet på tønden", hash: "c4e939cffed838367c1ef6e365102c653e9a75538e0cbe06bd617ee078f32791" },
-        { type: "text", label: "Navn", prompt: "Julebryggets navn", ph: "Skriv bryggets navn", hash: "7970f8a086d7bf004a7282ee3345163335b8abb59d119930b46ffd95edf3843f" }
+        { type: "number", label: "Tønde", prompt: "Nummeret på den rette tønde", unit: "", fmt: v => "Tønde nr. " + v, hash: ["c8f2e22e678fcc8e47902bc3fa26521e80361db5250b79bf3d163d704b046078"] },
+        { type: "symbol", label: "Segl", prompt: "Mærket på seglet", hash: ["85c099c78fa9a7624d8342aeff3f78eecc61c4cb1cb21994c11a390350ca0f16"] },
+        { type: "text", label: "Navn", prompt: "Det allersidste ord fra opskriften", ph: "Skriv ordet", hash: ["62cf4522856c4c941aad217db95bd28d87d6c7cb11f569cd196ccd3970392519", "e235b1761cf9bf223fd961cb3b32dae4fed3d2f7ab5f12b08e23e97fda721129", "0e8150a756cf778501c2fff5c4eaa15467a28414c2238cfd4ce5182a5b5c3697"] }
       ] }
   ];
 
-  // KUN PROTOTYPE: fjernes før december, sammen med spilmesterpanelet.
-  const TEST = {
-    1: "karamelmalt · 67 · Kornaks",
-    2: "saaz · Kanel, Nellike, Appelsinskal · 60",
-    3: "nissegær · Humle, Stjerne, Måne, Klokke · 14",
-    4: "44 · Krans · arvingens julebryg"
-  };
   const DATES = [["", "Rigtig dato (i dag)"], ["2026-11-28", "28. nov · dagen før"], ["2026-11-29", "29. nov · 1. advent"], ["2026-12-06", "6. dec · 2. advent"],
     ["2026-12-13", "13. dec · 3. advent"], ["2026-12-20", "20. dec · 4. advent"]];
 
@@ -1380,7 +1376,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
     return `<p class="flavor">${st.text}</p>
       ${n ? `<ol class="added" aria-label="I gryden">${st.steps.slice(0, n).map((s, i) =>
         `<li>${icon("humle")}<span class="a-label">${s.label}</span><span class="a-val">${esc(inp[i] || "")}</span></li>`).join("")}</ol>` : ""}
-      <form class="step" id="stepForm" autocomplete="off" novalidate>
+      <form class="step" id="stepForm" autocomplete="off" novalidate tabindex="-1">
         <p class="eyebrow ink">Ingrediens ${n + 1} af ${st.steps.length}</p>
         ${controlHTML(step)}
         <div class="s-actions">
@@ -1391,8 +1387,70 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
       <p class="nisse-line" id="nisseLine" aria-live="polite"></p>`;
   }
 
+  const HINTS = {
+      "2": [
+          "Skriv alle talordene i radiobeskeden op i rækkefølge. Hvilken kolonne på kortet skal I bruge?",
+          "Stemmen kom midt i vejrmeldingen for skibsfarten. Find den i radioprogrammet: kl. 21.40 = kolonnen 20–22.",
+          "Forbogstaverne staver BRUG KARAMEL MALT. Svaret er karamel."
+      ],
+      "3": [
+          "To ting i kuverten har præcis samme form. Hvad skal to skår gøre for at blive hele igen?",
+          "Læg skårene oven på hinanden, så kanterne passer, og hold dem op mod lyset.",
+          "Mod lyset står tallet 67. Mæsken skal være 67 °C."
+      ],
+      "4": [
+          "Start med rækken, hvor alle fire mærker er ens.",
+          "Brug kolonnen med tre stjerner, og find derefter humlen og klokken.",
+          "Tønde 15, stjerne 5, humle 20, klokke 10. Den tomme plads vejer 10 kg – mærket er klokken."
+      ],
+      "5": [
+          "Tag de lette ord først: 3 er MALT, 8 er LOFT, og 11 er LUCIA.",
+          "De gyldne felter staver ISAR OG DONAU – to floder. Find dem på rejsekortet.",
+          "Kun humleområde nr. 2 ligger mellem Isar og Donau. Slå nummeret op i signaturforklaringen: HALLERTAU."
+      ],
+      "6": [
+          "Læg opskriftskortet sammen. Hvilke krukker peger julebryggen på? Find dem på hylden ud fra glansbillederne.",
+          "Krukkerne har et lille rør, et lille søm og et æble med en drage. »Et krydderi skal kendes på sit navn« – slå navnene op i bladet.",
+          "Kanel, nellike og appelsinskal."
+      ],
+      "7": [
+          "Hvilken station ligger mellem Roskilde og Borup? Find alle tog, der holder dér efter kl. 12 – begge veje.",
+          "Det var en søndag: Læs fodnoterne. Eksprestoget fra København står i parentes ved Viby.",
+          "12.14 til 13.29 = 75 minutter."
+      ],
+      "8": [
+          "Etiketterne er skrevet på en skrivemaskine med luffer på – find et tastatur, fx på mobilen, og prøv nabotasterne.",
+          "Ryk hvert bogstav én tast til venstre. Hvilken landsby kom postkortet fra? Se poststemplet.",
+          "Poststemplet siger Kværkeby – gæren hedder GERTRUD."
+      ],
+      "9": [
+          "Tegn et skema med hane 1–4. Ledetråd 4 og 2 binder vægtene sammen: pilsner = karamel + 10, og røg = 2 × chokolade.",
+          "Chokolade 10 og røg 20, så karamel 15 og pilsner 25. Den tungeste (pilsner) står lige til højre for karamelmalten, og månen lige til højre for pilsneren.",
+          "Hane 1 nissehue, hane 2 kornaks, hane 3 måne, hane 4 humle."
+      ],
+      "10": [
+          "Håndbogen forklarer, hvordan vægtfylden falder. Prøv reglen af på de første dage i journalen – passer den?",
+          "Regn videre fra 1.034 den 6/12 med kælderens varme dag for dag. Hvornår når vægtfylden 1.010?",
+          "Den 11/12. Tæl fra og med 1/12 til og med 11/12: gæren skal have 11 dage."
+      ],
+      "11": [
+          "Find ledetrådene i notesbogen. En tønde med en tønde både over og under sig ligger i række 2 eller 3. Efter de første fire ledetråde er der ni tønder tilbage.",
+          "Efter ledetråd 5 er der kun to tilbage: nr. 23 og nr. 31. Kig på deres naboer til venstre og højre.",
+          "Tønde nr. 31: ulige, tredje række, uden kryds og dryp, krans på tønde 20 lige over og sløjfe på naboen nr. 32."
+      ],
+      "12": [
+          "Klip soldet ud – og klip de ni mørke felter væk. Det er hullerne, kornet faldt igennem.",
+          "Læg soldet på tavlen, læs hullerne række for række, og drej det en kvart omgang med uret fire gange.",
+          "MIT SEGL ER DET MÆRKE SOM DE VISE MÆND FULGTE – seglet er stjernen."
+      ],
+      "13": [
+          "Rammerne ligner noget, I har set før. Find de gamle breve frem.",
+          "Hvert brev fra trin 2 til trin 9 begynder med et stort bogstav i en guldramme. Skriv dem op i rækkefølge.",
+          "A-R-V-E-G-U-L-D. Det sidste ord er ARVEGULD."
+      ]
+  };
   function hintTexts(t) {
-    return [`Pladsholder: første ledetråd til trin ${t}.`, `Pladsholder: anden ledetråd til trin ${t}.`, `Pladsholder: løsningen på trin ${t}.`];
+    return HINTS[t] || ["Nissen kender ikke dette trin.", "Nissen kender ikke dette trin.", "Nissen kender ikke dette trin."];
   }
   function trinHTML(t) {
     const n = S.revealed[t] || 0, arr = hintTexts(t), labels = ["Hint 1", "Hint 2", "Løsning"];
@@ -1464,9 +1522,10 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
     else if (view === "hints") sheet.innerHTML = head + hintsHTML(st);
     else { sheet.innerHTML = head + brewHTML(st); tickCool(st); }
   }
+  // Flytter kun fokus til ingrediensens kort, ikke ind i tekstfeltet, så mobiltastaturet ikke springer op af sig selv.
   function focusStep() {
-    const f = sheet.querySelector("#s-in, #stepForm input, #stepForm [data-seq]") || sheet.querySelector("[data-close]");
-    if (f) f.focus({ preventScroll: true });
+    const f = sheet.querySelector("#stepForm") || sheet;
+    f.focus({ preventScroll: true });
   }
   function openView(v) {
     lastFocus = document.activeElement; current = null; view = v;
@@ -1515,6 +1574,26 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
   }
 
   sheetWrap.addEventListener("click", e => { if (e.target === sheetWrap) closeSheet(); });
+
+  // Mobil: når tastaturet åbner, krymper arket til det synlige område, og feltet rulles frem.
+  try {
+    const vp = document.querySelector('meta[name="viewport"]');
+    if (vp && !/interactive-widget/.test(vp.content)) vp.content += ", interactive-widget=resizes-content";
+  } catch (e) { /* ikke afgørende */ }
+  const vv = window.visualViewport;
+  const isField = el => el && (el.tagName === "TEXTAREA" || (el.tagName === "INPUT" && el.type === "text"));
+  function showField(el) { if (isField(el) && sheet.contains(el)) el.scrollIntoView({ block: "center", behavior: "smooth" }); }
+  function fitViewport() {
+    if (!vv) return;
+    sheetWrap.style.top = vv.offsetTop + "px";
+    sheetWrap.style.height = vv.height + "px";
+    sheetWrap.style.bottom = "auto";
+  }
+  if (vv) {
+    vv.addEventListener("resize", () => { fitViewport(); setTimeout(() => showField(document.activeElement), 60); });
+    vv.addEventListener("scroll", fitViewport);
+  }
+  sheet.addEventListener("focusin", e => { if (isField(e.target)) { setTimeout(() => showField(e.target), 350); setTimeout(() => showField(e.target), 800); } });
   document.addEventListener("keydown", e => { if (e.key === "Escape") { if (!$("#gm").hidden) toggleGM(false); else closeSheet(); } });
 
   sheet.addEventListener("click", e => {
@@ -1522,7 +1601,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
     if (e.target.closest("[data-hints]")) { view = "hints"; renderSheet(); const b = sheet.querySelector("[data-hint], [data-back]"); if (b) b.focus({ preventScroll: true }); return; }
     if (e.target.closest("[data-back]")) { view = "brew"; seq = []; renderSheet(); focusStep(); return; }
     const eb = e.target.closest("[data-edit]");
-    if (eb) { current = Number(eb.dataset.edit); view = "brew"; renderSheet(); sheet.scrollTop = 0; const f = sheet.querySelector("#t-beer"); if (f) f.focus({ preventScroll: true }); return; }
+    if (eb) { current = Number(eb.dataset.edit); view = "brew"; renderSheet(); sheet.scrollTop = 0; sheet.focus({ preventScroll: true }); return; }
     if (e.target.closest("[data-cert]")) { view = "cert"; renderSheet(); sheet.scrollTop = 0; const c = sheet.querySelector("[data-close]"); if (c) c.focus({ preventScroll: true }); return; }
     const sb = e.target.closest("[data-seq]");
     if (sb) { const st = byId(current), step = st.steps[S.progress[st.id] || 0]; if (seq.length < step.len) { seq.push(sb.dataset.seq); $("#seq").innerHTML = seqSlots(step); } return; }
@@ -1559,7 +1638,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
     const h = await sha(`${st.id}|${n + 1}|${r.v}`);
     if (!h) { line.className = "nisse-line warn"; line.textContent = "Browseren kan ikke tjekke opskriften her. Åbn siden over https."; return; }
     const k = `${st.id}-${n}`;
-    if (h === step.hash) {
+    if ([].concat(step.hash).includes(h)) {
       S.streak[k] = 0;
       (S.inputs[st.id] = S.inputs[st.id] || [])[n] = r.show;
       S.progress[st.id] = n + 1; seq = []; save();
@@ -1590,12 +1669,13 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
   /* ---------- Spilmester ---------- */
   const gm = $("#gm"), gmToggle = $("#gmToggle"), gmDate = $("#gmDate");
   gmDate.innerHTML = DATES.map(([v, l]) => `<option value="${v}">${l}</option>`).join("");
-  $("#gmAnswers").innerHTML = STATIONS.map(st => `<li>${st.advent}: ${TEST[st.id]}</li>`).join("");
   function toggleGM(show) {
     gm.hidden = !show; gmToggle.setAttribute("aria-expanded", String(show));
     if (show) { gmDate.value = S.sim; gmDate.focus(); }
   }
   gmToggle.addEventListener("click", () => toggleGM(gm.hidden));
+  const gmVisible = () => { gmToggle.hidden = !/spilmester/i.test(location.hash); if (gmToggle.hidden) toggleGM(false); };
+  window.addEventListener("hashchange", gmVisible); gmVisible();
   gmDate.addEventListener("change", () => { S.sim = gmDate.value; save(); if (!$("#scene-hall").hidden) renderHall(); });
   $("#gmGate").addEventListener("click", () => { toggleGM(false); S.introDone = false; save(); showGate(); });
   let resetArmed = null;
