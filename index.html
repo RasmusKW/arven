@@ -853,7 +853,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
       steps: [
         { type: "text", label: "Humle", prompt: "Humlesorten", ph: "Skriv humlens navn", hash: ["2a3127823572e1d0a74eb4bd447904788d59756155b80f4434df526107458f4c", "9cc730562fdbfa20581eef496aa651055643bdf418d61ed3b17bc5cd09c9c391", "11fa80f68dfc979c761bb429f3740c7cf4cbe702476f25dcc941940b4efe768e", "e51e15b59546479f52663697bd3296f1a3c9e05d2f6db39913e77d9df92f2df0", "23fedaf3d713d309ac97028dae04f03abb30821c885c19f4b34fe9ad5a7cd24a", "f5f747279c150109a6c4a97baf3044b87c045e912bebd3a673b3bc75982766ce"] },
         { type: "multi", label: "Krydderier", prompt: "De tre julekrydderier", pick: 3, hash: ["82f71eaedbd9fce64ee7b84c644aeb93e6cdf5fcb4f0032afadc8d09f2cf0c78"] },
-        { type: "number", label: "Kogetid", prompt: "Kogetiden", unit: "min.", fmt: v => v + " min.", hash: ["522855c346d7e0cefba6a9f03d3ef5406961a7ff43ab8df57ab6ed5e4c3938ec"] }
+        { type: "number", label: "Kogetid", prompt: "Kogetiden", unit: "min.", fmt: v => v + " min.", hash: ["0f8d4dba50a98cf3aaeb51c8cf1713aee1760428445e3a462649fb9a2b7e0ef7"] }
       ] },
     { id: 3, num: 3, name: "Gærtanken", short: "gærtanken", phase: "Gæring", advent: "3. advent", date: "2026-12-13", dateShort: "13. dec", dateLabel: "søndag 13. december",
       trinLabel: "Trin 8–10", trin: [8, 9, 10], vessel: "tank", door: "green",
@@ -1389,8 +1389,8 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
 
   const HINTS = {
       "2": [
-          "Skriv alle talordene i radiobeskeden op i rækkefølge. Hvilken kolonne på kortet skal I bruge?",
-          "Stemmen kom midt i vejrmeldingen for skibsfarten. Find den i radioprogrammet: kl. 21.40 = kolonnen 20–22.",
+          "Skriv talordene fra hver melding op for sig. Hvornår blev hver melding sendt?",
+          "Radioprogrammet giver tiderne: den tidlige radioavis kl. 19.00 = kolonnen 18–20, vejrmeldingen kl. 21.40 = 20–22, dagens sidste nyt kl. 22.10 = 22–24.",
           "Forbogstaverne staver BRUG KARAMEL MALT. Svaret er karamel."
       ],
       "3": [
@@ -1415,8 +1415,8 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
       ],
       "7": [
           "Hvilken station ligger mellem Roskilde og Borup? Find alle tog, der holder dér efter kl. 12 – begge veje.",
-          "Det var en søndag: Læs fodnoterne. Eksprestoget fra København står i parentes ved Viby.",
-          "12.14 til 13.29 = 75 minutter."
+          "Det var en søndag: Læs fodnoterne – S-togene kører netop om søndagen. Eksprestoget fra København står i parentes ved Viby.",
+          "12.04 til 13.29 = 85 minutter."
       ],
       "8": [
           "Etiketterne er skrevet på en skrivemaskine med luffer på – find et tastatur, fx på mobilen, og prøv nabotasterne.",
@@ -1424,8 +1424,8 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
           "Poststemplet siger Kværkeby – gæren hedder GERTRUD."
       ],
       "9": [
-          "Tegn et skema med hane 1–4. Ledetråd 4 og 2 binder vægtene sammen: pilsner = karamel + 10, og røg = 2 × chokolade.",
-          "Chokolade 10 og røg 20, så karamel 15 og pilsner 25. Den tungeste (pilsner) står lige til højre for karamelmalten, og månen lige til højre for pilsneren.",
+          "Tegn et skema med hane 1–4. Ledetråd 4 og 2 binder maltmængderne sammen: pilsner = karamel + 10, og røg = 2 × chokolade.",
+          "Chokolade 10 og røg 20, så karamel 15 og pilsner 25. Øllet med mest malt (pilsner) står lige til højre for karameløllet, og månen lige til højre for pilsneren.",
           "Hane 1 nissehue, hane 2 kornaks, hane 3 måne, hane 4 humle."
       ],
       "10": [
