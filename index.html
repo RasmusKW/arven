@@ -593,10 +593,14 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
 @keyframes bubble { from { transform: translateY(0); opacity: 1 } to { transform: translateY(-150px); opacity: 0 } }
 
 .ask-note { font-style: italic; color: var(--ink-soft); }
-.trins { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
-.trin { display: grid; gap: 8px; align-content: start; padding: 12px; border: 1px solid var(--parch-edge); border-radius: 6px; background: rgba(255, 255, 255, .2); }
-.trin h3 { font-size: 1.1rem; }
-.hints { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 1.05rem; }
+.trins { display: grid; gap: 10px; }
+.trin { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 12px; row-gap: 10px; padding: 12px 16px; border: 1px solid var(--parch-edge); border-radius: 6px; background: rgba(255, 255, 255, .2); }
+.trin h3 { grid-column: 1; grid-row: 1; font-size: 1.1rem; }
+.trin .smallbtn { grid-column: 2; grid-row: 1; justify-self: end; white-space: nowrap; }
+.hints { grid-column: 1 / -1; grid-row: 2; margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 1.05rem; line-height: 1.45; }
+.hints:empty { display: none; }
+.hints li { display: grid; grid-template-columns: 5.6rem minmax(0, 1fr); column-gap: 12px; align-items: baseline; }
+.hints li + li { padding-top: 8px; border-top: 1px dashed var(--parch-edge); }
 .hl { font-family: var(--display); font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--copper-ink); display: block; }
 .smallbtn { justify-self: start; padding: .3em .8em; border: 1px solid var(--ink-soft); border-radius: 4px; background: transparent; color: var(--ink); font-family: var(--display); font-size: .88rem; cursor: pointer; }
 .smallbtn:hover { background: var(--ink); color: var(--parch); }
@@ -671,6 +675,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
   .cert-list li { grid-template-columns: 1fr auto; }
   .cert-list li span:first-child { grid-column: 1 / -1; }
   .marks { gap: 6px; }
+  .hints li { grid-template-columns: 1fr; row-gap: 2px; }
 }
 
 /* ---------- Trin-overgang: rigtig ingrediens ---------- */
@@ -942,7 +947,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
         { type: "number", label: "Tønde", prompt: "Nummeret på den rette tønde", unit: "", fmt: v => "Tønde nr. " + v, hash: ["c8f2e22e678fcc8e47902bc3fa26521e80361db5250b79bf3d163d704b046078"] },
         { type: "symbol", label: "Segl", prompt: "Mærket på seglet", hash: ["85c099c78fa9a7624d8342aeff3f78eecc61c4cb1cb21994c11a390350ca0f16"] },
         { type: "text", label: "Navn", prompt: "Det allersidste ord fra opskriften", ph: "Skriv ordet", hash: ["62cf4522856c4c941aad217db95bd28d87d6c7cb11f569cd196ccd3970392519", "e235b1761cf9bf223fd961cb3b32dae4fed3d2f7ab5f12b08e23e97fda721129", "0e8150a756cf778501c2fff5c4eaa15467a28414c2238cfd4ce5182a5b5c3697"] },
-        { type: "number", label: "Hane", prompt: "Nummeret på hanen, der tapper julebryggen", unit: "", fmt: v => "Hane nr. " + v, hash: ["27e297364de81f842b8d5b6793fef145d294ee34333090ebf8f387994729b619"] }
+        { type: "number", label: "Hane", prompt: "Nummeret på hanen, der tapper julebryggen", unit: "", fmt: v => "Hane nr. " + v, hash: ["a8e047024bd01ca4ebf1cacb026baae19c285f0292bc14f01f04a3ab52212c7d"] }
       ] }
   ];
 
@@ -1522,9 +1527,9 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
           "A-R-V-E-G-U-L-D. Det sidste ord er ARVEGULD."
       ],
       "14": [
-          "Fire runde skiver og en lille metalnagle – de hører hjemme midt på hanevæggen, største skive nederst og mindste øverst.",
+          "Fire runde skiver og en lille metalnagle – de hører hjemme midt på hanevæggen med de 36 haner, største skive nederst og mindste øverst.",
           "Drej én skive ad gangen, til alle rørender ved dens kant passer med den næste – også i tykkelse. Der er kun én stilling, hvor alt går i ét. Et rør med prop fører ingen steder hen.",
-          "Julebryggen ligger i tønde 31 med stjerneseglet. Følg dens rør under de rør, der krydser det. Det ender ved hane 19."
+          "Julebryggen ligger i tønde 31 med stjerneseglet – pas på, der er tre tønder med nummer 31 og tre med stjerne. Dens rør krydser tre gange: under, over og under igen. Det ender ved hane 13."
       ]
   };
   function hintTexts(t) {
@@ -1533,7 +1538,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
   function trinHTML(t) {
     const n = S.revealed[t] || 0, arr = hintTexts(t), labels = ["Hint 1", "Hint 2", "Løsning"];
     return `<div class="trin" data-trin="${t}"><h3>Trin ${t}</h3>
-      <ol class="hints">${arr.slice(0, n).map((h, i) => `<li><span class="hl">${labels[i]}</span>${h}</li>`).join("")}</ol>
+      <ol class="hints">${arr.slice(0, n).map((h, i) => `<li><span class="hl">${labels[i]}</span><span>${h}</span></li>`).join("")}</ol>
       ${n < 3 ? `<button class="smallbtn" type="button" data-hint="${t}">${n === 2 ? "Vis løsningen" : "Spørg om hint " + (n + 1)}</button>` : ""}</div>`;
   }
   const askCount = () => S.hints === 0 ? "Du har ikke spurgt endnu." : `Han har talt til ${gange(S.hints)}.`;
