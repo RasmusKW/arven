@@ -672,6 +672,78 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
   .cert-list li span:first-child { grid-column: 1 / -1; }
   .marks { gap: 6px; }
 }
+
+/* ---------- Trin-overgang: rigtig ingrediens ---------- */
+.step { position: relative; }
+.step.step-ok { border-color: var(--hop-ink); box-shadow: 0 0 0 3px rgba(77, 106, 34, .22), 0 0 34px rgba(77, 106, 34, .35); transition: border-color .2s, box-shadow .25s; }
+.step.step-ok > :not(.ok-stamp):not(.ok-chip):not(.ok-spark) { transition: opacity .3s; opacity: .35; }
+.step.step-out { animation: stepOut .42s cubic-bezier(.5, 0, .9, .5) forwards; }
+@keyframes stepOut { to { transform: translateY(-22px) scale(.95); opacity: 0; } }
+.step.step-in { animation: stepIn .6s cubic-bezier(.2, .9, .25, 1.15) both; }
+@keyframes stepIn { 0% { transform: translateY(34px) rotate(-1.2deg); opacity: 0; } 55% { opacity: 1; } 100% { transform: none; } }
+.step.step-in .eyebrow { animation: eyePop .7s .25s ease both; }
+@keyframes eyePop { 0% { letter-spacing: .4em; opacity: 0; } 100% { opacity: 1; } }
+.added li.just-in { animation: justIn 1.1s ease both; }
+@keyframes justIn { 0% { transform: translateY(-10px) scale(.96); opacity: 0; background: rgba(77, 106, 34, 0); } 30% { opacity: 1; transform: none; background: rgba(77, 106, 34, .22); } 100% { background: rgba(77, 106, 34, 0); } }
+.added li.just-in svg { animation: hopSpin .9s .1s ease both; }
+@keyframes hopSpin { from { transform: rotate(-200deg) scale(.2); } to { transform: none; } }
+.ok-stamp { position: absolute; left: 50%; top: 50%; z-index: 3; display: grid; place-items: center; width: 118px; height: 118px; margin: -59px 0 0 -59px; border: 4px double var(--hop-ink); border-radius: 50%; background: radial-gradient(circle, rgba(255, 252, 240, .95) 55%, rgba(234, 217, 181, .9)); color: var(--hop-ink); pointer-events: none; animation: stamp .45s cubic-bezier(.3, 1.6, .5, 1) both; }
+.ok-stamp span { font-size: 2.6rem; line-height: 1; margin-top: 14px; }
+.ok-stamp b { font-family: var(--display); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px; }
+@keyframes stamp { 0% { transform: scale(2.2) rotate(-28deg); opacity: 0; } 100% { transform: scale(1) rotate(-9deg); opacity: 1; } }
+.ok-chip { position: absolute; z-index: 4; left: 16px; top: 16px; max-width: calc(100% - 32px); padding: .25em .7em; border-radius: 999px; background: var(--hop-ink); color: #fffaf0; font-family: var(--hand); font-size: 1.4rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; animation: chipUp .85s .1s cubic-bezier(.45, 0, .55, 1) both; }
+@keyframes chipUp { 0% { transform: translateY(var(--y0, 40px)) scale(1); opacity: 0; } 20% { opacity: 1; } 70% { opacity: 1; } 100% { transform: translateY(-70px) scale(.55); opacity: 0; } }
+.ok-spark { position: absolute; left: 50%; top: 50%; z-index: 2; width: 18px; height: 18px; margin: -9px 0 0 -9px; color: var(--hop-ink); pointer-events: none; animation: burst .9s .12s cubic-bezier(.2, .7, .3, 1) both; }
+.ok-spark svg { width: 100%; height: 100%; display: block; }
+.ok-spark.gold { color: var(--copper-ink); }
+
+/* ---------- Finale: det første glas ---------- */
+.tapscene { display: grid; justify-items: center; gap: 6px; padding: 6px 0 4px; }
+.tapscene svg { width: min(320px, 100%); height: auto; overflow: visible; }
+.tapscene .lever { transform-box: fill-box; transform-origin: 50% 100%; animation: lever .5s .2s ease-in-out both; }
+@keyframes lever { from { transform: rotate(0); } to { transform: rotate(-52deg); } }
+.tapscene .stream { transform-box: fill-box; transform-origin: 50% 0; animation: streamOn .3s .55s ease-out both, streamOff .35s 2.75s ease-in forwards; }
+@keyframes streamOn { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes streamOff { to { transform: translateY(60px) scaleY(0); opacity: 0; } }
+.tapscene .fill { animation: fillUp 2.1s .75s cubic-bezier(.35, 0, .25, 1) both; }
+@keyframes fillUp { from { transform: translateY(78px); } to { transform: translateY(0); } }
+.tapscene .foam { animation: foamUp 1.1s 2.2s ease-out both; }
+@keyframes foamUp { from { transform: translateY(8px) scaleY(.2); opacity: 0; } to { transform: none; opacity: 1; } }
+.tapscene .fizz circle { animation: fizz 1.4s infinite ease-in; }
+.tapscene .fizz circle:nth-child(2) { animation-delay: .4s; } .tapscene .fizz circle:nth-child(3) { animation-delay: .8s; } .tapscene .fizz circle:nth-child(4) { animation-delay: 1.1s; }
+.tapscene .twinkle path { transform-box: fill-box; transform-origin: center; animation: sparkle 1.2s 3s ease both; }
+.tapscene .twinkle path:nth-child(2) { animation-delay: 3.15s; } .tapscene .twinkle path:nth-child(3) { animation-delay: 3.3s; }
+.tapscene p { position: relative; height: 1.6em; width: 100%; text-align: center; font-family: var(--hand); font-size: 1.6rem; color: var(--copper-ink); }
+.tapscene p span { position: absolute; inset: 0; }
+.tapscene p span:first-child { animation: tsOut .4s 2.8s ease forwards; }
+.tapscene p span:last-child { opacity: 0; animation: tsIn .5s 3s ease forwards; }
+@keyframes tsOut { to { opacity: 0; transform: translateY(-8px); } }
+@keyframes tsIn { from { opacity: 0; transform: translateY(8px) scale(.9); } to { opacity: 1; transform: none; } }
+
+.finale { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 16px; overflow-y: auto; background: radial-gradient(ellipse at 50% 40%, rgba(244, 199, 122, .38), rgba(13, 19, 27, .92) 62%), rgba(6, 9, 14, .55); animation: finIn .9s ease both; }
+.finale.closing { animation: finOut .45s ease forwards; }
+@keyframes finIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes finOut { to { opacity: 0; } }
+.fin-sky { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+.fin-sky i { position: absolute; top: -12px; width: var(--s, 6px); height: var(--s, 6px); border-radius: 50%; background: #fffaf0; opacity: .85; box-shadow: 0 0 6px rgba(255, 250, 240, .8); animation: snowfall var(--d, 9s) linear var(--w, 0s) infinite; }
+.fin-sky i.g { background: var(--candle); clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); width: 14px; height: 14px; box-shadow: none; border-radius: 0; }
+@keyframes snowfall { 0% { transform: translate(0, 0) rotate(0); } 50% { transform: translate(var(--x, 20px), 52vh) rotate(180deg); } 100% { transform: translate(0, 105vh) rotate(360deg); } }
+.fin-glow { position: fixed; left: 50%; top: 42%; width: 760px; height: 760px; margin: -380px 0 0 -380px; border-radius: 50%; pointer-events: none; background: repeating-conic-gradient(from 0deg, rgba(244, 199, 122, .16) 0 6deg, transparent 6deg 18deg); -webkit-mask: radial-gradient(circle, #000 10%, transparent 68%); mask: radial-gradient(circle, #000 10%, transparent 68%); animation: rays 40s linear infinite, finIn 1.6s .3s ease both; }
+@keyframes rays { to { transform: rotate(360deg); } }
+.fin-card { position: relative; width: min(560px, 100%); display: grid; gap: 14px; padding: clamp(24px, 5vw, 44px); border-radius: 4px; color: var(--ink); text-align: center; background: radial-gradient(ellipse at 20% 8%, var(--parch-hi), transparent 60%), var(--parch); border: 2px solid var(--candle); outline: 1px solid rgba(138, 74, 28, .55); outline-offset: -9px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .3), 0 30px 80px rgba(0, 0, 0, .7), 0 0 90px rgba(244, 199, 122, .45); transform-origin: 50% 0; animation: unfold 1.1s .35s cubic-bezier(.2, .9, .2, 1) both; }
+.fin-card:focus { outline: 1px solid rgba(138, 74, 28, .55); }
+@keyframes unfold { 0% { transform: perspective(900px) rotateX(-88deg) translateY(-30px); opacity: 0; } 40% { opacity: 1; } 100% { transform: none; } }
+.fin-card .eyebrow { color: var(--copper-ink); }
+.fin-card h2 { font-family: var(--festive); font-size: clamp(2rem, 7vw, 2.8rem); line-height: 1.05; color: var(--copper-ink); }
+.fin-card .fin-text { display: grid; gap: 12px; text-align: left; font-size: 1.12rem; line-height: 1.5; }
+.fin-card .fin-text p, .fin-card h2, .fin-card .eyebrow, .fin-sig, .fin-card .cta { animation: lineIn .8s ease both; }
+.fin-card .eyebrow { animation-delay: 1.1s; } .fin-card h2 { animation-delay: 1.3s; }
+.fin-card .fin-text p:nth-child(1) { animation-delay: 1.8s; } .fin-card .fin-text p:nth-child(2) { animation-delay: 2.6s; } .fin-card .fin-text p:nth-child(3) { animation-delay: 3.4s; }
+.fin-sig { font-family: var(--hand); font-size: 1.9rem; color: var(--copper-ink); animation-delay: 4.1s; }
+.fin-card .cta { justify-self: center; min-width: 9rem; animation-delay: 4.6s; padding: .5em 1.4em; border: 0; border-radius: 4px; background: var(--ink); color: var(--candle); font-family: var(--display); font-size: 1.1rem; cursor: pointer; }
+.fin-card .cta:hover, .fin-card .cta:focus-visible { background: var(--copper-ink); }
+@keyframes lineIn { from { opacity: 0; transform: translateY(10px); filter: blur(2px); } to { opacity: 1; transform: none; filter: none; } }
+.fin-mug { width: 64px; height: 64px; margin: -6px auto 0; color: var(--copper-ink); animation: lineIn .8s .9s ease both, bob 3s 2s ease-in-out infinite; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -864,12 +936,13 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
         { type: "number", label: "Gæring", prompt: "Antal dage i gæring", unit: "dage", fmt: v => v + (v == 1 ? " dag" : " dage"), hash: ["4e736b05a195f2a1fd6b20fd6c016d1dd2e4449b199836da81c9018db99c23a3"] }
       ] },
     { id: 4, num: 4, name: "Lagerkælderen", short: "lagerkælderen", phase: "Lagring og tapning", advent: "4. advent", date: "2026-12-20", dateShort: "20. dec", dateLabel: "søndag 20. december",
-      trinLabel: "Trin 11–13", trin: [11, 12, 13], vessel: "barrels", door: "red",
-      text: "44 tønder venter på deres segl. Find den rette tønde, og giv årets julebryg et navn.",
+      trinLabel: "Trin 11–14", trin: [11, 12, 13, 14], vessel: "barrels", door: "red",
+      text: "44 tønder venter på deres segl. Find den rette tønde, giv årets julebryg et navn, og tap det første glas.",
       steps: [
         { type: "number", label: "Tønde", prompt: "Nummeret på den rette tønde", unit: "", fmt: v => "Tønde nr. " + v, hash: ["c8f2e22e678fcc8e47902bc3fa26521e80361db5250b79bf3d163d704b046078"] },
         { type: "symbol", label: "Segl", prompt: "Mærket på seglet", hash: ["85c099c78fa9a7624d8342aeff3f78eecc61c4cb1cb21994c11a390350ca0f16"] },
-        { type: "text", label: "Navn", prompt: "Det allersidste ord fra opskriften", ph: "Skriv ordet", hash: ["62cf4522856c4c941aad217db95bd28d87d6c7cb11f569cd196ccd3970392519", "e235b1761cf9bf223fd961cb3b32dae4fed3d2f7ab5f12b08e23e97fda721129", "0e8150a756cf778501c2fff5c4eaa15467a28414c2238cfd4ce5182a5b5c3697"] }
+        { type: "text", label: "Navn", prompt: "Det allersidste ord fra opskriften", ph: "Skriv ordet", hash: ["62cf4522856c4c941aad217db95bd28d87d6c7cb11f569cd196ccd3970392519", "e235b1761cf9bf223fd961cb3b32dae4fed3d2f7ab5f12b08e23e97fda721129", "0e8150a756cf778501c2fff5c4eaa15467a28414c2238cfd4ce5182a5b5c3697"] },
+        { type: "number", label: "Hane", prompt: "Nummeret på hanen, der tapper julebryggen", unit: "", fmt: v => "Hane nr. " + v, hash: ["27e297364de81f842b8d5b6793fef145d294ee34333090ebf8f387994729b619"] }
       ] }
   ];
 
@@ -1344,7 +1417,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
   $("#nisseBtn").addEventListener("click", () => say(POKES[Math.floor(Math.random() * POKES.length)]));
 
   /* ---------- Arket: ét trin ad gangen ---------- */
-  let current = null, view = "brew", lastFocus = null, seq = [], coolTimer = null;
+  let current = null, view = "brew", lastFocus = null, seq = [], coolTimer = null, busy = false;
   const sheetWrap = $("#sheetWrap"), sheet = $("#sheet");
 
   function headHTML(eyebrow, title) {
@@ -1447,6 +1520,11 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
           "Rammerne ligner noget, I har set før. Find de gamle breve frem.",
           "Hvert brev fra trin 2 til trin 9 begynder med et stort bogstav i en guldramme. Skriv dem op i rækkefølge.",
           "A-R-V-E-G-U-L-D. Det sidste ord er ARVEGULD."
+      ],
+      "14": [
+          "Fire runde skiver og en lille metalnagle – de hører hjemme midt på hanevæggen, største skive nederst og mindste øverst.",
+          "Drej én skive ad gangen, til alle rørender ved dens kant passer med den næste – også i tykkelse. Der er kun én stilling, hvor alt går i ét. Et rør med prop fører ingen steder hen.",
+          "Julebryggen ligger i tønde 31 med stjerneseglet. Følg dens rør under de rør, der krydser det. Det ender ved hane 19."
       ]
   };
   function hintTexts(t) {
@@ -1468,7 +1546,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
   function doneHTML(st) {
     const inp = S.inputs[st.id] || [], t = S.taste[st.id] || {}, r = Number(t.rating) || 0;
     return `<div class="success"><p class="big">Brygget lykkes!</p>
-        <p>Elleve tønder ruller ned i kælderen. <strong>Du må nu åbne pakken mærket ${st.advent}.</strong></p></div>
+        <p>${st.id === 4 ? "De sidste elleve tønder ruller ned i kælderen. Alle 44 er fyldt!" : "Elleve tønder ruller ned i kælderen."} <strong>Du må nu åbne pakken mærket ${st.advent}.</strong></p></div>
       ${inp.length ? `<ol class="added" aria-label="Opskriften">${st.steps.map((s, i) => `<li>${icon("humle")}<span class="a-label">${s.label}</span><span class="a-val">${esc(inp[i] || "")}</span></li>`).join("")}</ol>` : ""}
       <section class="taste" aria-labelledby="tasteH"><h3 id="tasteH">Smagebog · ${st.advent}</h3>
         <div class="field"><label for="t-beer">Hvad var der i pakken?</label><input id="t-beer" type="text" value="${esc(t.beer || "")}" placeholder="Øllens navn"></div>
@@ -1477,7 +1555,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
         <div class="field"><label for="t-note">Noter</label><textarea id="t-note" rows="2" placeholder="Duft, smag og eftersmag">${esc(t.note || "")}</textarea></div>
         <p class="saved" id="saved">Gemmes automatisk på denne enhed.</p>
       </section>
-      <div class="done-actions">${st.id === 4 ? `<button class="cta ghost" type="button" data-cert>Se dit brygmesterbevis</button>` : ""}<button class="cta" type="button" data-close>Gem</button></div>`;
+      <div class="done-actions">${st.id === 4 ? `<button class="cta" type="button" data-cert>Se dit brygmesterbevis</button>` : `<button class="cta" type="button" data-close>Gem</button>`}</div>`;
   }
 
   const titleCase = s => s.replace(/(^|\s)(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
@@ -1504,7 +1582,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
       return `<li><span>${st.advent}</span><span>${esc(t.beer || "Ikke skrevet ned")}</span>
         <span class="hops-mini" role="img" aria-label="${r} af 5 humleknopper">${hopsMini(r)}</span></li>`;
     }).join("");
-    return headHTML("Trin 14 af 15", "Brygmesterbevis") +
+    return headHTML("Julebryggen er tappet", "Brygmesterbevis") +
       `<p class="cert-text">Hermed bevidnes, at brygmesterens arving har indfriet løftet. Årets julebryg, <em>${esc(name)}</em>, hviler nu i 44 tønder i kælderen.</p>
        <ol class="cert-list">${rows}</ol>
        <p>Nissen blev spurgt ${gange(S.hints)}, og ${S.wrongTotal === 1 ? "1 forkert ingrediens" : S.wrongTotal + " forkerte ingredienser"} røg i gryden undervejs.</p>
@@ -1594,7 +1672,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
     vv.addEventListener("scroll", fitViewport);
   }
   sheet.addEventListener("focusin", e => { if (isField(e.target)) { setTimeout(() => showField(e.target), 350); setTimeout(() => showField(e.target), 800); } });
-  document.addEventListener("keydown", e => { if (e.key === "Escape") { if (!$("#gm").hidden) toggleGM(false); else closeSheet(); } });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") { if ($("#finale")) closeFinale(); else if (!$("#gm").hidden) toggleGM(false); else closeSheet(); } });
 
   sheet.addEventListener("click", e => {
     if (e.target.closest("[data-close]")) { closeSheet(); return; }
@@ -1631,6 +1709,7 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
 
   sheet.addEventListener("submit", async e => {
     e.preventDefault();
+    if (busy) return;
     const st = byId(current), n = S.progress[st.id] || 0, step = st.steps[n], line = $("#nisseLine"), form = e.target;
     if (coolLeft(st) > 0) return;
     const r = readValue(step);
@@ -1642,8 +1721,14 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
       S.streak[k] = 0;
       (S.inputs[st.id] = S.inputs[st.id] || [])[n] = r.show;
       S.progress[st.id] = n + 1; seq = []; save();
-      if (n + 1 === st.steps.length) { brewAll(st); return; }
-      renderSheet(); focusStep();
+      const last = n + 1 === st.steps.length;
+      await stepOut(form, r.show, last);
+      if (current !== st.id) return;
+      if (last) { brewAll(st); return; }
+      view = "brew"; renderSheet();
+      const li = sheet.querySelector(".added li:last-child"); if (li) li.classList.add("just-in");
+      const nf = $("#stepForm"); if (nf) nf.classList.add("step-in");
+      focusStep();
       const l = $("#nisseLine"); l.className = "nisse-line ok"; l.textContent = RIGHT[n % RIGHT.length];
     } else {
       S.streak[k] = (S.streak[k] || 0) + 1; S.wrongTotal++;
@@ -1656,7 +1741,104 @@ body.intro .nisse:not(.in) .bubble { opacity: 0; transform: scale(.6); }
     }
   });
 
+  // Rigtig ingrediens: stempel, gnister og svar der flyver op i gryden, før næste ingrediens glider ind.
+  function stepOut(form, text, last) {
+    busy = true;
+    const btn = form.querySelector("#addBtn"); if (btn) btn.disabled = true;
+    const inp = form.querySelector("input, .marks, .seq-wrap, .s-set");
+    form.classList.add("step-ok");
+    const chip = document.createElement("div"); chip.className = "ok-chip"; chip.setAttribute("aria-hidden", "true"); chip.textContent = text;
+    if (inp) chip.style.setProperty("--y0", Math.max(0, inp.offsetTop - 16) + "px");
+    const stamp = document.createElement("div"); stamp.className = "ok-stamp"; stamp.setAttribute("aria-hidden", "true");
+    stamp.innerHTML = `<span>✓</span><b>I gryden</b>`;
+    form.append(chip, stamp);
+    for (let i = 0; i < 12; i++) {
+      const sp = document.createElement("i"), a = (i / 12) * Math.PI * 2 + Math.random() * .4, d = 70 + Math.random() * 60;
+      sp.className = "ok-spark" + (i % 3 === 0 ? " gold" : ""); sp.setAttribute("aria-hidden", "true");
+      sp.style.setProperty("--dx", Math.round(Math.cos(a) * d * 1.5) + "px"); sp.style.setProperty("--dy", Math.round(Math.sin(a) * d * .8) + "px");
+      sp.innerHTML = `<svg viewBox="0 0 24 24"><use href="#m-humle"/></svg>`;
+      form.appendChild(sp);
+    }
+    return new Promise(res => setTimeout(() => {
+      form.classList.add("step-out");
+      setTimeout(() => { busy = false; res(); }, 420);
+    }, last ? 950 : 820));
+  }
+
+  function tapSceneHTML() {
+    return `<div class="tapscene" aria-live="polite">
+      <svg viewBox="0 0 260 190" aria-hidden="true">
+        <defs><clipPath id="glassClip"><path d="M150 100 L212 100 L205 178 L157 178 Z"/></clipPath>
+          <linearGradient id="beerG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2b640"/><stop offset="1" stop-color="#c9811f"/></linearGradient></defs>
+        <ellipse cx="58" cy="78" rx="50" ry="64" fill="#b98048" stroke="#4a2e18" stroke-width="3"/>
+        <ellipse cx="58" cy="78" rx="41" ry="54" fill="none" stroke="#5b3a1e" stroke-width="5"/>
+        <ellipse cx="58" cy="78" rx="30" ry="40" fill="none" stroke="#8a5a2b" stroke-width="1.5"/>
+        <text x="58" y="74" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="22" fill="#2b1a0e">31</text>
+        <circle cx="58" cy="104" r="11" fill="#a8322d" stroke="#5e1714" stroke-width="1.5"/>
+        <path d="M58 96.5l2.2 4.8 5.2.5-3.9 3.5 1.1 5.1-4.6-2.6-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.5z" fill="#f7e6bd"/>
+        <rect x="100" y="70" width="84" height="13" rx="4" fill="#c9973a" stroke="#5a3a14" stroke-width="2"/>
+        <rect x="172" y="76" width="16" height="22" rx="3" fill="#c9973a" stroke="#5a3a14" stroke-width="2"/>
+        <g class="lever"><rect x="140" y="38" width="9" height="34" rx="4.5" fill="#7a5a26" stroke="#3a2412" stroke-width="2"/><circle cx="144.5" cy="38" r="6" fill="#a8322d" stroke="#3a2412" stroke-width="2"/></g>
+        <rect class="stream" x="177" y="98" width="6" height="74" rx="3" fill="url(#beerG)"/>
+        <g clip-path="url(#glassClip)">
+          <g class="fill"><rect x="146" y="104" width="70" height="80" fill="url(#beerG)"/>
+            <g class="fizz" fill="none" stroke="#fff4cc" stroke-width="1.2"><circle cx="165" cy="160" r="2"/><circle cx="182" cy="150" r="1.6"/><circle cx="196" cy="165" r="2.2"/><circle cx="174" cy="130" r="1.4"/></g></g>
+        </g>
+        <g class="foam"><path d="M148 104 C150 92 160 90 164 96 C168 86 184 86 186 95 C192 88 206 90 212 102 L212 108 L148 108 Z" fill="#fffaf0" stroke="#d9c9a8" stroke-width="1.5"/></g>
+        <path d="M150 100 L212 100 L205 178 L157 178 Z" fill="rgba(255,255,255,.14)" stroke="#6b5a44" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M157 108 L161 170" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round"/>
+        <g class="twinkle" fill="#f4c77a"><path d="M226 60l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><path d="M134 44l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/><path d="M236 128l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></g>
+      </svg>
+      <p><span>Det første glas tappes …</span><span>Skål!</span></p>
+    </div>`;
+  }
+
+  function finaleHTML() {
+    const name = titleCase((S.inputs[4] && S.inputs[4][2]) || "julebryggen");
+    let sky = "";
+    for (let i = 0; i < 34; i++) {
+      const g = i % 6 === 0;
+      sky += `<i class="${g ? "g" : ""}" style="left:${(Math.random() * 100).toFixed(1)}%;--s:${(3 + Math.random() * 5).toFixed(1)}px;--d:${(7 + Math.random() * 8).toFixed(1)}s;--w:-${(Math.random() * 14).toFixed(1)}s;--x:${Math.round(Math.random() * 60 - 30)}px"></i>`;
+    }
+    return `<div class="fin-sky" aria-hidden="true">${sky}</div><div class="fin-glow" aria-hidden="true"></div>
+      <div class="fin-card" tabindex="-1">
+        <svg class="fin-mug" viewBox="0 0 24 24" aria-hidden="true"><use href="#m-humle"/></svg>
+        <p class="eyebrow">Julenat i bryghuset</p>
+        <h2 id="finTitle">Det første glas</h2>
+        <div class="fin-text">
+          <p>Hanen hoster, hikker – og så løber det: gyldent og klart, med et skum så hvidt som nysne. Det dufter af karamel og kanel og af noget, man ikke kan sætte navn på. Måske af ham, der skrev opskriften.</p>
+          <p>Fireogfyrre tønder <em>${esc(name)}</em> hviler nu i kælderen. Løftet er indfriet, og jeg har ikke flere gåder at drille dig med. Næsten ingen.</p>
+          <p>Min herre sagde altid, at en julebryg først er færdig, når nogen skåler i den. Så find glassene frem, brygmester. Bryghuset er dit nu. Glædelig jul!</p>
+        </div>
+        <p class="fin-sig">Humlenissen – hihi!</p>
+        <button class="cta" type="button" id="finNext">Næste</button>
+      </div>`;
+  }
+  function openFinale() {
+    const f = document.createElement("div");
+    f.className = "finale"; f.id = "finale";
+    f.setAttribute("role", "dialog"); f.setAttribute("aria-modal", "true"); f.setAttribute("aria-labelledby", "finTitle");
+    f.innerHTML = finaleHTML();
+    document.body.appendChild(f);
+    f.querySelector(".fin-card").focus({ preventScroll: true });
+    f.querySelector("#finNext").addEventListener("click", closeFinale);
+    setTimeout(() => { const b = $("#finNext"); if (b && document.contains(b)) b.focus({ preventScroll: true }); }, 4700);
+  }
+  function closeFinale() {
+    const f = $("#finale"); if (!f || f.classList.contains("closing")) return;
+    f.classList.add("closing");
+    current = 4; view = "brew"; renderSheet(); sheet.scrollTop = 0;
+    sheetWrap.hidden = false;
+    setTimeout(() => { f.remove(); const c = sheet.querySelector("[data-cert]"); if (c) c.focus({ preventScroll: true }); }, 450);
+  }
+  function finale(st) {
+    S.solved[st.id] = true; justFilled = st.id; save();
+    sheet.innerHTML = headHTML(`${st.advent} · ${st.trinLabel} · ${st.phase}`, st.name) + tapSceneHTML();
+    setTimeout(() => { renderHall(); openFinale(); }, 4200);
+  }
+
   function brewAll(st) {
+    if (st.id === 4) { finale(st); return; }
     S.solved[st.id] = true; justFilled = st.id; save();
     sheet.innerHTML = headHTML(`${st.advent} · ${st.trinLabel} · ${st.phase}`, st.name) +
       `<div class="brewing" aria-live="polite">${"<i></i>".repeat(12)}<p>Alt er i gryden. Kedlen bobler …</p></div>`;
